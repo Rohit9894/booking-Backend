@@ -1,7 +1,13 @@
 const Booking = require("../models/booking.model");
 const bookVehicle = async (req, res) => {
   try {
-    const { startDate, endDate, customerFirstName,customerLastName, vehicleId } = req.body;
+    const {
+      startDate,
+      endDate,
+      customerFirstName,
+      customerLastName,
+      vehicleId,
+    } = req.body;
 
     const start = new Date(startDate);
     const end = new Date(endDate);
@@ -37,4 +43,13 @@ const bookVehicle = async (req, res) => {
     throw new Error(error);
   }
 };
-module.exports = { bookVehicle };
+
+const getBookVehicle = async (req, res) => {
+  try {
+    const data = await Booking.find({});
+    res.send(data);
+  } catch (error) {
+    res.send(error);
+  }
+};
+module.exports = { bookVehicle, getBookVehicle };
